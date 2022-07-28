@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
 export interface Slot {
-	occupied: boolean,
-	price?: number,
+	occupied: boolean
+	price?: number
 	carId: string
 }
 
@@ -17,7 +17,7 @@ interface Payload {
 }
 
 export interface ParkingState {
-  slots: Slot[],
+  slots: Slot[]
   freeSlots: number
 }
 

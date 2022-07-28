@@ -6,17 +6,17 @@ Some ideas has been borrowed from [How to Solve the Parking Lot Challenge in Jav
 
 ## Behavior
 
-- fixed number of parking slots (TODO: )
-- display available number of slots
-- manually park the car
-- automatically park the car
+- fixed number of parking slots (TODO: add input)
+- ~~display available number of slots~~
+- ~~manually park the car~~
+- ~~automatically park the car~~
 
 ### Fun stuff
 
 - race conditions
 - rush hours
 - multiple agents
-- timers on the individual slots
+- ~~timers on the individual slots~~ (TODO: proper timer instead of setTimeout)
 - waitlist (based on timers?)
 
 ### Super fun stuff

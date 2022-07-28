@@ -1,12 +1,11 @@
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { park, remove, selectCount, getAllSlots } from './parkingSlice';
-import { Heading, Container, Button, SimpleGrid, GridItem, Tooltip, Divider, Center } from '@chakra-ui/react'
+import { Heading, Container, Button, SimpleGrid, GridItem, Tooltip, Divider, Center, Spinner } from '@chakra-ui/react'
 
 const uniqueId = () => {
 	return Date.now().toString(36);
 };
-
 
 const ParkingSlotItem = ({ carId, removeCar }: {
 	carId: string,
@@ -14,7 +13,9 @@ const ParkingSlotItem = ({ carId, removeCar }: {
 }) => {
 	return <GridItem>
 		<Tooltip label={carId} fontSize='md'>
-			<Button onClick={removeCar}>Remove Car</Button>
+			<Button onClick={removeCar}>
+				<Spinner size='sm' speed='1s' /> Remove
+			</Button>
 		</Tooltip>
 	</GridItem>
 }
@@ -34,6 +35,7 @@ const Parking = () => {
 	const count = useAppSelector(selectCount);
 	const allSlots = useAppSelector(getAllSlots);
 	const canPark = count > 0;
+
 	return (
 		<Container>
 			<Center height={50}>
@@ -51,7 +53,9 @@ const Parking = () => {
 						}} />;
 					} else {
 						return <PlaceholderParkingSlotItem addCar={() => {
-							dispatch(park({ carId: uniqueId(), slotIndex: index }))
+							const carId = uniqueId()
+							dispatch(park({ carId, slotIndex: index }));
+							setTimeout(() => dispatch(remove({ carId })), 10000);
 						}} key={`${index}-placeholder`} />;
 					}
 				})}
@@ -59,7 +63,11 @@ const Parking = () => {
 			<Center height={30}>
 				<Divider />
 			</Center>
-			<Button disabled={!canPark} onClick={() => dispatch(park({ carId: uniqueId() }))}>Park automatically</Button>
+			<Button disabled={!canPark} onClick={() => {
+				const carId = uniqueId();
+				dispatch(park({ carId }));
+				setTimeout(() => dispatch(remove({ carId })), 10000);
+			}}>Park automatically</Button>
 		</Container>
 	);
 }
