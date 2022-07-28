@@ -7,8 +7,11 @@ const uniqueId = () => {
 	return Date.now().toString(36);
 };
 
-// @ts-ignore
-const ParkingSlotItem = ({ carId, removeCar }) => {
+
+const ParkingSlotItem = ({ carId, removeCar }: {
+	carId: string,
+	removeCar: () => void
+}) => {
 	return <GridItem>
 		<Tooltip label={carId} fontSize='md'>
 			<Button onClick={removeCar}>Remove Car</Button>
@@ -16,8 +19,9 @@ const ParkingSlotItem = ({ carId, removeCar }) => {
 	</GridItem>
 }
 
-// @ts-ignore
-const PlaceholderParkingSlotItem = ({ addCar }) => {
+const PlaceholderParkingSlotItem = ({ addCar }: {
+	addCar: () => void
+}) => {
 	return <GridItem>
 		<Tooltip label={'Park here!'} fontSize='md'>
 			<Button onClick={addCar} colorScheme='green'>Empty Slot</Button>
