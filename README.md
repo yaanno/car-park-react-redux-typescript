@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# Fun with React / Redux / TypeScript / Chakra UI - Car parking problem
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+
+Some ideas has been borrowed from [How to Solve the Parking Lot Challenge in JavaScript](https://www.freecodecamp.org/news/parking-lot-challenge-solved-in-javascript/).
+
+## Behavior
+
+- fixed number of parking slots (TODO: )
+- display available number of slots
+- manually park the car
+- automatically park the car
+
+### Fun stuff
+
+- race conditions
+- rush hours
+- multiple agents
+- timers on the individual slots
+- waitlist (based on timers?)
+
+### Super fun stuff
+- add price to slots
+- make price dynamic based on: rush hour, avail slots
+- daily sum
 
 ## Available Scripts
 
