@@ -4,22 +4,20 @@ import { park, remove, selectCount, getAllSlots } from './parkingSlice';
 import { Heading, Container, Button, SimpleGrid, GridItem, Tooltip, Divider, Center } from '@chakra-ui/react'
 
 const uniqueId = () => {
-	const dateString = Date.now().toString(36);
-	const randomness = Math.random().toString(36).substr(2);
-	return dateString + randomness;
+	return Date.now().toString(36);
 };
 
 // @ts-ignore
-const ParkingSlotItem = ({ slot, removeCar }) => {
+const ParkingSlotItem = ({ carId, removeCar }) => {
 	return <GridItem>
-		<Tooltip label={slot.carId} fontSize='md'>
+		<Tooltip label={carId} fontSize='md'>
 			<Button onClick={removeCar}>Remove Car</Button>
 		</Tooltip>
 	</GridItem>
 }
 
 // @ts-ignore
-const PlaceholderSlotItem = ({ addCar }) => {
+const PlaceholderParkingSlotItem = ({ addCar }) => {
 	return <GridItem>
 		<Tooltip label={'Park here!'} fontSize='md'>
 			<Button onClick={addCar} colorScheme='green'>Empty Slot</Button>
@@ -34,23 +32,25 @@ const Parking = () => {
 	const canPark = count > 0;
 	return (
 		<Container>
-			<Heading>Free slots: {count}</Heading>
+			<Center height={50}>
+				<Heading>Free slots: {count}</Heading>
+			</Center>
 			<Center height={30}>
 				<Divider />
 			</Center>
-			<SimpleGrid columns={2} spacing={2}>
+			<SimpleGrid columns={4} spacing={2}>
 				{allSlots.map((slot, index) => {
 					if (slot.occupied) {
-						return <ParkingSlotItem key={`${index}-${slot.carId}`} slot={slot} removeCar={() => {
-							dispatch(remove({ carId: slot.carId || '' }))
+						const { carId } = slot;
+						return <ParkingSlotItem key={`${index}-${carId}`} carId={carId} removeCar={() => {
+							dispatch(remove({ carId }))
 						}} />;
 					} else {
-						return <PlaceholderSlotItem addCar={() => {
+						return <PlaceholderParkingSlotItem addCar={() => {
 							dispatch(park({ carId: uniqueId(), slotIndex: index }))
 						}} key={`${index}-placeholder`} />;
 					}
 				})}
-
 			</SimpleGrid>
 			<Center height={30}>
 				<Divider />
@@ -60,4 +60,4 @@ const Parking = () => {
 	);
 }
 
-export default Parking
+export default Parking;

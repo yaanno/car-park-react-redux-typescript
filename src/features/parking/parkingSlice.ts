@@ -4,7 +4,7 @@ import { RootState } from '../../app/store';
 export interface Slot {
 	occupied: boolean,
 	price?: number,
-	carId?: string
+	carId: string
 }
 
 export interface Car {
@@ -25,7 +25,8 @@ const EMPTY_SLOTS = 20;
 
 export const generateEmptySlots = (slots: number = EMPTY_SLOTS): Slot[] => {
 	return new Array(slots).fill({
-		occupied: false
+		occupied: false,
+		carId: ''
 	})
 }
 
