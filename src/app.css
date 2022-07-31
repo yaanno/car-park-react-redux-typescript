@@ -1,0 +1,111 @@
+@font-face {
+    font-family: 'PriceDown';
+    src: url('./fonts/pricedown\ bl.otf') format("opentype");
+}
+
+@font-face {
+    font-family: 'SFArborHeavy';
+    font-weight: bold;
+    src: url('./fonts/SF\ Arborcrest\ Heavy.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: 'SFArborLight';
+    src: url('./fonts/SF\ Arborcrest\ Light.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: 'SFArborMedium';
+    src: url('./fonts/SF\ Arborcrest\ Medium.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: 'SFArborMediumOblique';
+    src: url('./fonts/SF\ Arborcrest\ Medium\ Oblique.ttf') format("opentype");
+}
+
+@font-face {
+    font-family: 'RageItalic';
+    src: url('./fonts/RAGE.ttf') format("opentype");
+}
+
+body {
+	background: none !important;
+}
+
+html {
+	background: #000 url('../public/hotel.jpg') no-repeat;
+	background-size: auto;
+}
+
+.status {
+	position: absolute;
+	right: 10%;
+	top: 10%;
+	padding: 1rem;
+	font-family: 'SFArborHeavy';
+}
+
+.time {
+	font-size: 2rem;
+	color: blue;
+}
+
+.money {
+	font-size: 2rem;
+	color: green;
+}
+
+.life {
+	font-size: 2rem;
+}
+
+.shield {
+	color: grey;
+	height: 2rem;
+}
+
+.heart {
+	color: pink;
+	height: 2rem;
+}
+
+.felony {
+	font-size: 2rem;
+	color: darkblue;
+}
+
+.stats {
+	text-align: right;
+}
+
+.stats > div {
+	height: 2rem;
+}
+
+.rage {
+	width: 8rem;
+}
+
+
+.parkingArea {
+	margin: 2rem 0;
+}
+
+.hidden{
+	visibility: hidden;
+}
+
+.avatarBlock {
+	font-family: 'RageItalic';
+	color: #FF10F0;
+	font-size: 2rem;
+	cursor: pointer;
+}
+
+.welcome {
+	font-family: 'RageItalic';
+	font-size: 4rem;
+	color: #FF10F0;
+	text-shadow: 1px 1px 2px #000;
+}

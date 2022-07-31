@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 
 export interface Slot {
 	occupied: boolean
-	price?: number
+	price: number
 	carId: string
 }
 
@@ -11,9 +11,14 @@ export interface Car {
 	carId: string
 }
 
+interface Price {
+	price: number
+}
+
 interface Payload {
 	carId: string
 	slotIndex?: number
+	price?: number
 }
 
 export interface ParkingState {
@@ -22,12 +27,19 @@ export interface ParkingState {
 }
 
 const EMPTY_SLOTS = 20;
+const MAX_PRICE = 100;
+
+const generateRandomPrice = () => {
+	return Math.floor(Math.random() * MAX_PRICE);
+}
 
 export const generateEmptySlots = (slots: number = EMPTY_SLOTS): Slot[] => {
+	const price = generateRandomPrice();
 	return new Array(slots).fill({
 		occupied: false,
-		carId: ''
-	})
+		carId: '',
+		price
+	});
 }
 
 const initialState: ParkingState = {
@@ -49,6 +61,8 @@ export const parkingSlice = createSlice({
 		let emptySlot;
 		if (action.payload.slotIndex) {
 			emptySlot = state.slots[action.payload.slotIndex];
+		} else if (action.payload.price) {
+			emptySlot = state.slots.find(slot => slot.price === action.payload.price && !slot.occupied);
 		} else {
 			emptySlot = state.slots.find(slot => !slot.occupied);
 		}
@@ -67,7 +81,13 @@ export const parkingSlice = createSlice({
 		}
 		resetSlot(occupiedSlot);
 		state.freeSlots += 1;
-    }
+    },
+	updatePrice: (state: ParkingState) => {
+		state.slots.map(slot => {
+			slot.price = slot.occupied ? slot.price : generateRandomPrice();
+			return slot;
+		});
+	}
   },
 });
 export const selectCount = (state: RootState) => state.parkingSlot.freeSlots;
@@ -75,6 +95,14 @@ export const getAllSlots = (state: RootState) => state.parkingSlot.slots;
 export const getOccupiedSlots = (state: RootState) => {
 	return state.parkingSlot.slots.filter(slots => slots.occupied);
 };
+export const getCheapestSlot = (state: RootState) => {
+	if (state.parkingSlot.freeSlots === 0) {
+		return;
+	}
+	const slots = [...state.parkingSlot.slots].filter(slot => !slot.occupied);
+	slots.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+	return state.parkingSlot.slots.find(slot => slot.price === slots[0].price && !slot.occupied);
+};
 
-export const { park, remove } = parkingSlice.actions;
+export const { park, remove, updatePrice } = parkingSlice.actions;
 export default parkingSlice.reducer;

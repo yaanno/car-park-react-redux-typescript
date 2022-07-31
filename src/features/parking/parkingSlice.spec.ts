@@ -20,13 +20,13 @@ describe('parking reducer', () => {
 	it('should handle park', () => {
 		const actual = parkingReducer(initialState, park({ carId: 'abc' }));
 		expect(actual.freeSlots).toEqual(EMPTY_SLOTS - 1);
-		expect(actual.slots[0]).toEqual({carId: 'abc', occupied: true});
+		expect(actual.slots[0]).toEqual({carId: 'abc', occupied: true, price: actual.slots[0].price});
 	});
 
 	it('should handle park with spec slot index', () => {
 		const actual = parkingReducer(initialState, park({ carId: 'abc', slotIndex: 2 }));
 		expect(actual.freeSlots).toEqual(EMPTY_SLOTS - 1);
-		expect(actual.slots[2]).toEqual({carId: 'abc', occupied: true});
+		expect(actual.slots[2]).toEqual({carId: 'abc', occupied: true, price: actual.slots[2].price});
 	});
 
 	it('should handle remove', () => {

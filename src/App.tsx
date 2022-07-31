@@ -1,11 +1,9 @@
-import { Container } from '@chakra-ui/react'
 import Parking  from './features/parking/Parking';
+import './app.css';
 
 const App = () => {
   return (
-    <Container>
       <Parking />
-    </Container>
   );
 }
 
